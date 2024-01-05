@@ -1,37 +1,29 @@
+from collections import defaultdict as dict, deque as dq
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        chk = {}
+        # char_dict = {}
+        # max_length = start = 0
 
-        for item in s:
-            if item in chk:
-                chk[item] += 1
-            else:
-                chk[item] = 1
+        # for i, char in enumerate(s):
+        #     if char in char_dict and start <= char_dict[char]:
+        #         start = char_dict[char] + 1
+        #     else:
+        #         max_length = max(max_length, i - start + 1)
 
-        chklength = len(chk)
-        l = list(chk.keys())
-        l.sort()
+        #     char_dict[char] = i
 
-        for idx in range(len(s)):
-            tmp = list(s[idx:idx + chklength])
-            tmp.sort()
-            if ''.join(l) == ''.join(tmp):
-                return chklength
+        # return max_length
 
-        chklength -= 1
-        for length in range(chklength, 0, -1):
-            for idx in range(len(s)):
-                my_str = s[idx : idx + length]
-                if len(my_str) < length:
-                    break
-                
-                my_dict = {}
-                for ms in my_str:
-                    if ms in my_dict:
-                        break
-                    my_dict[ms] = 1
-                print(my_dict)
-                if len(my_dict) == length:
-                    return length
+        counter = dict(int)
+        queue = dq()
+        answer = 0
+        for char in s:
+            counter[char] += 1
+            queue.append(char)
 
-        return 0
+            while counter[char] > 1:
+                counter[queue.popleft()] -= 1
+
+            answer = max(answer, len(queue))
+            
+        return answer
