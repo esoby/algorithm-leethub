@@ -1,22 +1,18 @@
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        my_dict = {}
-        ans = []
-        for num in nums:
-            if num in my_dict:
-                my_dict[num] += 1
-            else:
-                my_dict[num] = 1
-        
-        values_list = list(my_dict.values())
-        values_list.sort(reverse=True)
-        values_list = values_list[:k]
-        
-        for num in values_list:
-            for key in my_dict.keys():
-                print(num, key)
-                if num == my_dict[key]:
-                    ans.append(key)
-                    my_dict[key] = -1
+        n = len(nums)
 
-        return ans
+        cnt = {}
+        for num in nums:
+            if num in cnt:
+                cnt[num] += 1
+            else:
+                cnt[num] = 1
+        
+        cnt = sorted(cnt.items(), key=lambda item:item[1], reverse=True)
+        
+        answer = []
+        for i in range(k):
+            answer.append(cnt[i][0])
+        
+        return answer
