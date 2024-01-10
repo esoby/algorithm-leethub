@@ -9,17 +9,19 @@ class Solution:
         ans = []
         my_dict = {}
 
+        dial = {
+            '2' : 'abc',
+            '3' : 'def',
+            '4' : 'ghi',
+            '5' : 'jkl',
+            '6' : 'mno',
+            '7' : 'pqrs',
+            '8' : 'tuv',
+            '9' : 'wxyz'
+        }
+        
         for s in digits:
-            idx = (int(s) - 2) * 3
-            if s == '7':
-                val = alpha[idx : idx+4]
-            elif s == '8':
-                val = alpha[idx+1 : idx+4]
-            elif s == '9':
-                val = alpha[idx+1 : idx+5]
-            else:
-                val = alpha[idx : idx+3]
-            my_dict[s] = list(val)
+            my_dict[s] = dial[s]
 
         stack = ['']
 
@@ -33,3 +35,24 @@ class Solution:
                     stack.append(word + c)
 
         return ans
+
+# from itertools import product  
+# class Solution:
+#     def letterCombinations(self, digits: str) -> List[str]:
+#         if digits == "":
+#             return []
+#         dial = {
+#         '2' : 'abc',
+#         '3' : 'def',
+#         '4' : 'ghi',
+#         '5' : 'jkl',
+#         '6' : 'mno',
+#         '7' : 'pqrs',
+#         '8' : 'tuv',
+#         '9' : 'wxyz'
+#         }
+
+#         dials = [dial[x] for x in digits]
+#         com = list(product(*dials))
+#         answer = [''.join(x) for x in com]
+#         return answer
