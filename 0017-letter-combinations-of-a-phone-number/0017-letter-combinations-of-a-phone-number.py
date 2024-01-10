@@ -1,11 +1,8 @@
-import string
-
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         if not digits:
             return []
 
-        alpha = string.ascii_lowercase
         ans = []
         my_dict = {}
 
@@ -26,7 +23,6 @@ class Solution:
         stack = ['']
 
         while stack:
-            print(stack)
             word = stack.pop()
             if len(word) == len(digits):
                 ans.append(word)
